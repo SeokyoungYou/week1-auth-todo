@@ -3,7 +3,6 @@ import TodoForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
 import TodoContext from '../context/todoContext';
 import { theme } from '../theme';
-import TodoForm from '../components/TodoForm';
 
 export default function Todos() {
   return (
