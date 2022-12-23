@@ -9,9 +9,8 @@ import { validation } from '../utils/validation';
 import { saveLocalStorageToken } from '../utils/local-storage-fn';
 
 export default function SignForm({ signState, setSignState }) {
-  // useState 부분은 지환님 코드 합치면 삭제
   const [isActive, setIsActive] = useState(false);
-  const [form, setForm] = useState(initialForm);
+  const [, setForm] = useState(initialForm);
   const emailRef = useRef(initialForm.email);
   const passwordRef = useRef(initialForm.password);
   const navigate = useNavigate();
@@ -25,14 +24,13 @@ export default function SignForm({ signState, setSignState }) {
     passwordRef.current.value = '';
   };
 
-  // 지환님 부분 코드
   const handleChange = (e) => {
     // useState 부분은 지환님 코드 합치면 삭제
     setForm((prev) => {
       const newForm = { ...prev, [e.target.id]: e.target.value };
       return newForm;
     });
-    // 유효성 검사
+
     const isValidated =
       validation('email', emailRef.current.value) &&
       validation('password', passwordRef.current.value);
@@ -40,7 +38,6 @@ export default function SignForm({ signState, setSignState }) {
     return;
   };
 
-  //API 구현이 안되어 있어 임시적인 회원가입/로그인 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {

@@ -1,23 +1,23 @@
-import { useState } from 'react';
-import TodoList from '../components/TodoList';
 import styled from 'styled-components';
+import TodoForm from '../components/TodoForm';
+import TodoList from '../components/TodoList';
+import TodoContext from '../context/todoContext';
 import { theme } from '../theme';
 import TodoForm from '../components/TodoForm';
 
-const Todos = () => {
-  const [todos, setTodos] = useState([]);
-
+export default function Todos() {
   return (
     <Wrapper bgColor={theme.bgColorlight}>
       <Title>Todo list</Title>
       <TodoWrapper>
-        <TodoForm />
-        <TodoList />
+        <TodoContext>
+          <TodoForm />
+          <TodoList />
+        </TodoContext>
       </TodoWrapper>
     </Wrapper>
   );
-};
-export default Todos;
+}
 
 const Wrapper = styled.div`
   width: 100vw;

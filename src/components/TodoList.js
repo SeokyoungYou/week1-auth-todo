@@ -1,24 +1,39 @@
+import { dispatchContext, todoContext } from '../context/todoContext';
 import TodoItem from './TodoItem';
-
+import { useContext, useEffect } from 'react';
+import { getTodos } from '../utils/axios-api-fn';
 const TodoList = () => {
-  const getTodo = [
-    { id: 123, isCompleted: false, todo: 'todotodo', userId: 111 },
-    { id: 124, isCompleted: true, todo: 'todo', userId: 111 },
-    { id: 125, isCompleted: false, todo: 'todoto', userId: 111 },
-  ];
+  const getTodo = useContext(todoContext);
+  const dispatch = useContext(dispatchContext);
 
+  useEffect(() => {
+    const initTodo = () => {
+      getTodos()
+        .then((response) => {
+          dispatch({ type: 'INIT', initTodos: response });
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+    };
+    initTodo();
+  }, [dispatch]);
   return (
     <>
-      {getTodo?.map((todo) => {
-        return (
-          <TodoItem
-            key={todo.id}
-            text={todo.todo}
-            id={todo.id}
-            isCompleted={todo.isCompleted}
-          />
-        );
-      })}
+      {getTodo ? (
+        getTodo.map((todo) => {
+          return (
+            <TodoItem
+              key={todo.id}
+              text={todo.todo}
+              id={todo.id}
+              isCompleted={todo.isCompleted}
+            />
+          );
+        })
+      ) : (
+        <span>TodoList가 없습니다</span>
+      )}
     </>
   );
 };

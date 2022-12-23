@@ -1,27 +1,33 @@
 import styled from 'styled-components';
 import { useState, useRef, useCallback } from 'react';
+import { postTodos } from '../utils/axios-api-fn';
+import { dispatchContext } from '../context/todoContext';
 
 function TodoForm() {
   const [newTodo, setNewTodo] = useState();
   const inputRef = useRef();
+  const dispatch = useContext(dispatchContext);
   const changeHandler = (evt) => {
     const {
       target: { value },
     } = evt;
     setNewTodo(value);
   };
-  const sumbitHandler = useCallback(
-    async (evt) => {
-      evt.preventDefault();
-      if (newTodo) {
-        // await postTodo(newTodo); //TODO: axios-api-fn 추가
-        inputRef.current.value = '';
-        inputRef.current.focus();
-        setNewTodo('');
-      }
-    },
-    [inputRef, newTodo],
-  );
+  const sumbitHandler = async (evt) => {
+    evt.preventDefault();
+    if (newTodo) {
+      await postTodos({ todo: newTodo })
+        .then((response) => {
+          dispatch({ type: 'ADD', todo: response });
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
+      inputRef.current.value = '';
+      inputRef.current.focus();
+      setNewTodo('');
+    }
+  };
 
   return (
     <Form onSubmit={sumbitHandler}>
@@ -54,6 +60,7 @@ const AddBtn = styled.button`
   border: none;
   background-color: ${(props) => props.theme.btnColor};
   color: white;
+  cursor: pointer;
 `;
 
 export default TodoForm;
