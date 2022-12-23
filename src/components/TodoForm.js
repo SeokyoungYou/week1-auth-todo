@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useState, useRef, useCallback } from 'react';
-import { postTodo } from '../../api/api';
 
 function TodoForm() {
   const [newTodo, setNewTodo] = useState();
@@ -15,7 +14,7 @@ function TodoForm() {
     async (evt) => {
       evt.preventDefault();
       if (newTodo) {
-        await postTodo(newTodo);
+        // await postTodo(newTodo); //TODO: axios-api-fn 추가
         inputRef.current.value = '';
         inputRef.current.focus();
         setNewTodo('');
@@ -38,7 +37,9 @@ function TodoForm() {
 
 const Form = styled.form`
   width: 100%;
-  padding: 20px 0;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
 `;
 const TodoInput = styled.input`
   width: 270px;

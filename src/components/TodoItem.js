@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 
 const TodoItem = ({ text, id, isCompleted }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -33,8 +34,8 @@ const TodoItem = ({ text, id, isCompleted }) => {
     }
   };
   return isEdit ? (
-    <>
-      <input
+    <TodoWrapper>
+      <Checkbox
         autoFocus
         type="text"
         value={text}
@@ -48,10 +49,10 @@ const TodoItem = ({ text, id, isCompleted }) => {
       <button type="button" onClick={clickEdit}>
         취소
       </button>
-    </>
+    </TodoWrapper>
   ) : (
-    <>
-      <input
+    <TodoWrapper>
+      <Checkbox
         type="checkbox"
         checked={isCompleteByCheckBox}
         onChange={() => setIsCompleteByCheckBox(!isCompleteByCheckBox)}
@@ -63,8 +64,18 @@ const TodoItem = ({ text, id, isCompleted }) => {
       <button type="button" onClick={() => clickRemoveButton(id)}>
         삭제
       </button>
-    </>
+    </TodoWrapper>
   );
 };
 
 export default TodoItem;
+
+const Checkbox = styled.input``;
+
+const TodoWrapper = styled.li`
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

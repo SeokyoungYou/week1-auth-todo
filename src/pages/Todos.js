@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TodoList from '../components/TodoList';
 import styled from 'styled-components';
 import { theme } from '../theme';
+import TodoForm from '../components/TodoForm';
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -10,12 +11,8 @@ const Todos = () => {
     <Wrapper bgColor={theme.bgColorlight}>
       <Title>Todo list</Title>
       <TodoWrapper>
-        {/* TODO: D. TodoForm 컴포넌트 구현 */}
-        {todos.length === 0 ? (
-          <span>투두 리스트가 없습니다.</span>
-        ) : (
-          <TodoList />
-        )}
+        <TodoForm />
+        <TodoList />
       </TodoWrapper>
     </Wrapper>
   );

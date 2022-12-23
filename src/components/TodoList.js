@@ -11,13 +11,12 @@ const TodoList = () => {
     <>
       {getTodo?.map((todo) => {
         return (
-          <li key={todo.id}>
-            <TodoItem
-              text={todo.todo}
-              id={todo.id}
-              isCompleted={todo.isCompleted}
-            />
-          </li>
+          <TodoItem
+            key={todo.id}
+            text={todo.todo}
+            id={todo.id}
+            isCompleted={todo.isCompleted}
+          />
         );
       })}
     </>
