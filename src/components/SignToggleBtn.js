@@ -16,7 +16,7 @@ export default function SignToggleBtn({ signState, setSignState }) {
   );
 }
 
-const ToggleBtn = styled.div`
+const ToggleBtn = styled.button`
   background-color: ${(props) => props.bgColor};
   padding: 10px;
   border-radius: 10px;

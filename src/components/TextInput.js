@@ -4,7 +4,7 @@ import { INPUT } from '../utils/constants';
 export default function TextInput({ type, value, onChange, refValue }) {
   return (
     <Wrapper>
-      <InputLabel for={type}>{type}</InputLabel>
+      <InputLabel htmlFor={type}>{type}</InputLabel>
       <Input
         type={type}
         id={type}

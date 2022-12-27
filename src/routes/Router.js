@@ -3,14 +3,16 @@ import Home from '../pages/Home';
 import Todos from '../pages/Todos';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+import { getLocalStorageToken } from '../utils/local-storage-fn';
 
 function Router() {
+  const isLogin = getLocalStorageToken();
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <PublicRoute>
+          <PublicRoute isLogin={isLogin}>
             <Home />
           </PublicRoute>
         }
@@ -18,7 +20,7 @@ function Router() {
       <Route
         path="/todo"
         element={
-          <PrivateRoute>
+          <PrivateRoute isLogin={isLogin}>
             <Todos />
           </PrivateRoute>
         }
